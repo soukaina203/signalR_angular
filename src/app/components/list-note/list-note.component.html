@@ -1,0 +1,10 @@
+<div class="bg-white rounded-md shadow-md card w-[50%]">
+  <h1 class="text-xl font-bold card-header">List Of Notes</h1>
+  <div class="card-body">
+    <div class="flex flex-col gap-4" *ngFor="let i of Notes">
+      <h1 class="text-lg font-medium">{{i.name}}</h1>
+      <p>{{i.desc}}</p>
+      <button class="px-4 py-2 text-white bg-red-500 rounded-md" (click)="Delete(i.name)">Delete</button>
+    </div>
+  </div>
+</div>
