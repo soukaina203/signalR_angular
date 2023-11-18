@@ -8,12 +8,18 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from './auth/login/login.component';
 import { ChatUiComponent } from './components/chat-ui/chat-ui.component';
 import { HttpClientModule } from '@angular/common/http';
+import { WelcomeComponent } from './components/welcome/welcome.component';
+import { ChooseComponent } from './components/choose/choose.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ChatUiComponent,
-    LoginComponent
+    LoginComponent,
+    WelcomeComponent,
+    ChooseComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

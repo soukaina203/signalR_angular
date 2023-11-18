@@ -4,15 +4,14 @@
     <h1 class="mb-4 text-xl font-bold text-center">Discussions</h1>
     <div class="flex flex-col gap-2" (click)="DiscussionChoosed(i.id)" *ngFor="let i of discussions">
 
-
       <ng-container *ngIf="currentUserId===i.idSender">
-        <button class="px-4 py-2 text-sm font-semibold rounded-md bg-slate-200 hover:bg-slate-300">
- {{ i.receiver_name }}
+        <button class="px-4 py-2 mt-3 text-sm font-semibold rounded-md bg-slate-200 hover:bg-slate-300">
+          {{ i.receiver_name }}
         </button>
       </ng-container>
       <ng-container *ngIf="currentUserId===i.idReceiver">
-        <button class="px-4 py-2 text-sm font-semibold rounded-md bg-slate-200 hover:bg-slate-300">
- {{ i.sender_name }}
+        <button class="px-4 py-2 mt-3 text-sm font-semibold rounded-md bg-slate-200 hover:bg-slate-300">
+          {{ i.sender_name }}
         </button>
       </ng-container>
     </div>
@@ -20,38 +19,73 @@
   </div>
 
   <div class="w-[60%]  h-[32rem] bg-white rounded-md shadow-md">
-    <h1 class="mb-4 text-xl font-bold text-center">Chat</h1>
+    <h1 class="px-4 py-2 mt-4 text-lg font-semibold rounded-md mr-7">{{nameOfperson}}</h1>
+    <div class="chat-messages overflow-y-auto h-[70%] border-b border-gray-300 flex flex-col">
 
-    <div class="chat-messages overflow-y-auto h-[70%] border-b border-gray-300">
-
-      <div class="h-[78%]">
+      <div class="h-auto ">
         <ng-template ngFor let-message [ngForOf]="MessagesOfDiscussion" let-i="index" let-odd="odd">
-          <!-- {{MessagesOfDiscussion | json}} -->
-          <div>
+
+          <div class="ml-2 mr-2 ">
 
             <ng-container *ngIf="message.idSender==currentUserId">
-              <p class="flex justify-end  text-[20px] border-r-amber-100 rounded-top-left rounded-bottom-left">
-                {{ message.content }}
-              </p>
+              <!-- flex justify-end -->
+              <div class="flex items-start justify-end p-2 rounded-top-right rounded-bottom-right">
+                <div class="bg-[#E5EDF2] p-2 rounded-lg">
+                  {{ message.content }}
+                </div>
+              </div>
+
             </ng-container>
             <ng-template [ngIf]="message.idSender!=currentUserId">
-
-              <p class="flex justify-start  text-[20px] rounded-top-right rounded-bottom-right">
-                {{ message.content }}
-              </p>
+              <div class="flex items-start justify-start p-2 rounded-top-right rounded-bottom-right">
+                <div class="bg-[#E5EDF2] p-2 rounded-lg">
+                  {{ message.content }}
+                </div>
+              </div>
             </ng-template>
           </div>
         </ng-template>
       </div>
-      <div class="flex items-center justify-between p-4 border-t border-gray-300 chat-input">
-        <form action="" [formGroup]="fg" (ngSubmit)="sendMessage()">
+      <div >
+        <ng-template ngFor let-message [ngForOf]="messages" let-i="index" let-odd="odd">
+          <div class="">
 
-          <input type="text" name="message" formControlName="message" class="w-full h-full p-4 border border-gray-300"
-            placeholder="Type a message...">
-          <button type="submit"
-            class="px-4 py-2 font-bold text-white bg-indigo-500 rounded hover:bg-indigo-700">Send</button>
-        </form>
+            <ng-container *ngIf="message.idSender==currentUserId">
+              <div class="flex items-start justify-end p-2 rounded-top-right rounded-bottom-right">
+                <div class="bg-[#E5EDF2] p-2 rounded-lg">
+                  {{ message.content }}
+                </div>
+              </div>
+            </ng-container>
+            <ng-template [ngIf]="message.idSender!=currentUserId">
+
+              <div class="flex items-start justify-start p-2 rounded-top-right rounded-bottom-right">
+                <div class="bg-[#E5EDF2] p-2 rounded-lg">
+                  {{ message.content }}
+                </div>
+              </div>
+            </ng-template>
+          </div>
+        </ng-template>
       </div>
+
+      <ng-template [ngIf]="openChat">
+        <div
+          class="fixed flex items-center justify-between w-[50%]  p-4 border-t border-gray-300  bottom-14 chat-input">
+          <form action="" [formGroup]="fg" (ngSubmit)="sendMessage()" class="flex w-[100%] justify-center items-center">
+            <input type="text" name="message" formControlName="message"
+              class="w-[60%] h-full p-4 border border-gray-300" placeholder="Type a message...">
+            <button type="submit"
+              class="px-4 py-2 font-bold text-white bg-indigo-500 rounded hover:bg-indigo-700">Send</button>
+          </form>
+        </div>
+      </ng-template>
+      <ng-template [ngIf]="!openChat" class="">
+        <div class="flex items-center justify-center h-screen ">
+
+          <h1 class="text-4xl font-bold text-center text-purple-600">Welcome to Chat App</h1>
+        </div>
+      </ng-template>
     </div>
 
   </div>
