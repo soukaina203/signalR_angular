@@ -22,7 +22,7 @@ export class LoginComponent {
   handleSubmit = () => {
     const User = this.formGroup.value;
     this.AuthService.login(User).subscribe((res) => {
-
+        console.log(res)
       if(res.token){
         localStorage.setItem('token', res.token);
         const userData = JSON.stringify(res.user);

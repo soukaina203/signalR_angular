@@ -8,47 +8,36 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class MessageService {
-    private apiUrl = environment.messageApi;
+  readonly controller = 'Message'
+
     private http = inject(HttpClient)
     fetchData(): Observable<Message[]> {
-      return this.http.get<Message[]>(this.apiUrl).pipe(
-        catchError((error) => throwError('An error occurred while fetching data'))
-      );
+      return this.http.get<Message[]>(`${environment.urlApi}/${this.controller}`)
     }
 
     SendData(message: Message): Observable<any> {
-      return this.http.post(this.apiUrl, message).pipe(
-        catchError((error) => throwError(error))
-      );
+      return this.http.post(`${environment.urlApi}/${this.controller}`, message)
     }
 
     DeleteData(id: number | null): Observable<any> {
-      return this.http.delete(`${this.apiUrl}/${id}`).pipe(
-        catchError((error) => throwError('An error occurred while deleting data'))
-      );
+      return this.http.delete(`${environment.urlApi}/${this.controller}/${id}`)
     }
 
     getMessage(id: number): Observable<Message> {
-      return this.http.get<Message>(`${this.apiUrl}/${id}`).pipe(
-        catchError((error) => throwError('An error occurred while getting Message details'))
-      );
+      return this.http.get<Message>(`${environment.urlApi}/${this.controller}/${id}`)
     }
 
     updateMessage(id: string | null, data: Message): Observable<any> {
-      return this.http.patch(`${this.apiUrl}/${id}`, data).pipe(
-        catchError((error) => throwError('An error occurred while updating the Message'))
-      );
+      return this.http.patch(`${environment.urlApi}/${this.controller}/${id}`, data)
     }
 
 
     createMessage(Message: Message): Observable<any> {
-      return this.http.post(this.apiUrl, Message).pipe(
-        catchError((error) => throwError('An error occurred while creating the Message'))
-      );
+      return this.http.post(`${environment.urlApi}/${this.controller}`, Message)
     }
 
     getMessagesOfDisscution(id:number):Observable<any>{
-      return this.http.get<Message[]>(`${this.apiUrl}/${id}`);
+      return this.http.get<Message[]>(`${environment.urlApi}/${this.controller}/${id}`);
     }
 
 }

@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class DiscussionService {
-  private apiUrl = environment.DiscussionApi;
+  readonly controller = 'Discussion'
   constructor(private http: HttpClient) { }
 
   fetchData(): Observable<Discussion[]> {
@@ -17,35 +17,35 @@ export class DiscussionService {
 
 
   getAllDiscussionsId(idUser:number ):Observable<any> {
-    return this.http.get(`${this.apiUrl}/custom/${idUser}`);
+    return this.http.get(`${environment.urlApi}/${this.controller}/custom/${idUser}`);
   }
 
   SendData(data: object): Observable<any> {
-    return this.http.post(this.apiUrl, data).pipe(
+    return this.http.post(`${environment.urlApi}`, data).pipe(
       catchError((error) => throwError('An error occurred while sending data'))
     );
   }
 
   DeleteData(id: number  | null): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`).pipe(
+    return this.http.delete(`${environment.urlApi}/${this.controller}/${id}`).pipe(
       catchError((error) => throwError('An error occurred while deleting data'))
     );
   }
 
   getDiscussion(id: number): Observable<Discussion> {
-    return this.http.get<Discussion>(`${this.apiUrl}/${id}`).pipe(
+    return this.http.get<Discussion>(`${environment.urlApi}/${this.controller}/${id}`).pipe(
       catchError((error) => throwError('An error occurred while getting Discussion details'))
     );
   }
 
   updateDiscussion(id: string | null, data: Discussion): Observable<any> {
-    return this.http.patch(`${this.apiUrl}/${id}`, data).pipe(
+    return this.http.patch(`${environment.urlApi}/${this.controller}/${id}`, data).pipe(
       catchError((error) => throwError('An error occurred while updating the Discussion'))
     );
   }
 
   createDiscussion(Discussion: Discussion): Observable<any> {
-    return this.http.post(this.apiUrl, Discussion).pipe(
+    return this.http.post(`${environment.urlApi}/${this.controller}`, Discussion).pipe(
       catchError((error) => throwError('An error occurred while creating the Discussion'))
     );
   }

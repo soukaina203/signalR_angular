@@ -5,16 +5,27 @@ import { Injectable } from '@angular/core';
 })
 export class SessionService {
 
+  token = '';
+
+  constructor() {
+    try {
+      this.token = this.getItem('token') as string
+    } catch (error) {
+      console.error(error)
+      this.token = ''
+    }
+  }
+
 
     getItem(key: string): string | null {
-      return sessionStorage.getItem(key);
+      return localStorage.getItem(key);
     }
 
     setItem(key: string, value: string): void {
-      sessionStorage.setItem(key, value);
+      localStorage.setItem(key, value);
     }
 
     removeItem(key: string): void {
-      sessionStorage.removeItem(key);
+      localStorage.removeItem(key);
     }
   }

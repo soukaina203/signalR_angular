@@ -5,10 +5,11 @@
 export const environment = {
   production: false,
   ProductApi: 'http://localhost:5000/api/products', // Development API endpoint
-  DiscussionApi: 'http://localhost:5000/api/Discussion', // Development API endpoint
-  messageApi: 'http://localhost:5000/api/Message', // Development API endpoint
-  loginApi: 'http://localhost:5000/api/Account/Login', // Development API endpoint
-
+  // DiscussionApi: 'http://localhost:5000/api/Discussion', // Development API endpoint
+  // messageApi: 'http://localhost:5000/api/Message', // Development API endpoint
+  // loginApi: 'http://localhost:5000/api/Account/Login', // Development API endpoint
+url: 'http://localhost:5000',
+urlApi: 'http://localhost:5000/api',
 };
 
 /*
